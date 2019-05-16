@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="dialog0_9">
 		<div class="clearfix tableStyle">
 			<table border="1" cellspacing="0" v-for="(item,index) in detailObj" :key="index">
 				<tr>

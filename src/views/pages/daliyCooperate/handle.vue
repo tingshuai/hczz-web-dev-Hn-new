@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="dialog0_9">
 		<div class="clearfix tableStyle" >
 			<div class="tablemmp" v-if="isshow">	
 				<table border="1" cellspacing="0" >

@@ -51,7 +51,7 @@
 		},
 		data() {
 			return {
-				activeName: 'result',
+				activeName: 'handle',
 				visible:this.show,
 				fncHandel:null,//处理流程的Promise对象
 				fncDetail:null,//详细信息的Promise对象

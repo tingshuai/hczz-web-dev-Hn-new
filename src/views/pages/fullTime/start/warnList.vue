@@ -11,7 +11,7 @@
 					<Input type="text" clearable v-model.trim="basePage.bjnr" placeholder="请输入报警内容"></Input>
 				</FormItem>
 				<FormItem label="录入时间:" :label-width="84">
-					<el-date-picker type="daterange" :default-value="new Date(new Date()-30*24*3600000)" :picker-options="pickerOptions2" v-model="basePage.time" start-placeholder="开始日期" end-placeholder="结束日期"  @change="handleDate"></el-date-picker>
+					<el-date-picker type="daterange" :picker-options="pickerOptions2" v-model="basePage.time" start-placeholder="开始日期" end-placeholder="结束日期"  @change="handleDate"></el-date-picker>
 				</FormItem>
 				<Button type="primary" class="searchBtn" @click="search">查询</Button>
 			</Form>

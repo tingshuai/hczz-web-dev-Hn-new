@@ -6,17 +6,17 @@
 		</div>
 		<div class="work-todo-table">
 			<el-card class="work-todo-table-card">
-				<p slot="header">
+				<div slot="header" class="header">
 					<img src="@/images/home/rwsx.png" alt="" />
 					<span>任务事项</span>
-				</p>
+				</div>
 				<div class="radio">
 					<el-radio v-model="radio" label="1">待办事项</el-radio>
 					<el-radio v-model="radio" label="2">跟进事项</el-radio>
 				</div>
 				<Table :columns="columns" :data="dataCopy" :loading="loading"></Table>
 				<div class="pagination-ct">
-					<Page class="clientPage" :current.sync="basePage.current" :total="total" show-sizer placement="top" @on-change="pageChange" @on-page-size-change="pageSizeChange" :page-size="basePage.pageSize" :page-size-opts="pageArray" show-elevator show-total></Page>
+					<Page class="clientPage" :current.sync="basePage.current" :total="total" placement="top" :page-size="5" @on-change="pageChange" show-elevator show-total></Page>
 				</div>
 			</el-card>
 		</div>
@@ -863,7 +863,6 @@
 				},
 				data: [],
 				dataCopy: [],
-				pageArray: [10, 20, 30],
 				basePage: {
 					pageNumber: 1,
 					pageSize: 10,
@@ -1170,7 +1169,7 @@
 			},
 			pageChange(current) {
 				this.basePage.pageNum = current;
-				this.dataCopy = this.data.slice((current - 1) * 10, (current - 1) * 10 + 10);
+				this.dataCopy = this.data.slice((current - 1) * 5, (current - 1) * 5 + 5);
 			},
 			pageSizeChange() {},
 			getLeader2() {
@@ -1204,7 +1203,7 @@
 					if(res != null) {
 						this.data = res;
 						this.total = res.length;
-						this.dataCopy = this.data.slice((index - 1) * 10, (index - 1) * 10 + 10);
+						this.dataCopy = this.data.slice((index - 1) * 5, (index - 1) * 5 + 5);
 					} else {
 						this.leaderDetail = {
 							xm: '',
@@ -1225,7 +1224,7 @@
 					if(res != null) {
 						this.data = res;
 						this.total = res.length;
-						this.dataCopy = this.data.slice((index - 1) * 10, (index - 1) * 10 + 10);
+						this.dataCopy = this.data.slice((index - 1) * 5, (index - 1) * 5 + 5);
 					} else {
 						this.leaderDetail = {
 							xm: '',
@@ -1249,7 +1248,7 @@
 	}
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 	.ivu-table:after,
 	.ivu-table:before {
 		content: "";
@@ -1260,16 +1259,17 @@
 	.workbench-page {
 		width: 100%;
 		height: 100%;
-		.el-card__header {
+		/deep/ .el-card__header {
 			background-color: #fafafa;
 			padding: 14px 16px;
 		}
-		.work-todo-table {
+		/deep/ .work-todo-table {
 			height: calc(~"100% - 320px");
 			.work-todo-table-card {
 				height: 100%;
 				position: relative;
 				.el-card__body {
+					padding: 0;
 					.radio {
 						position: absolute;
 						right: 18px;
@@ -1336,5 +1336,9 @@
 	
 	.ivu-table-overflowX {
 		overflow-x: hidden;
+	}
+	.header{
+		display:flex;
+		align-items: center;
 	}
 </style>

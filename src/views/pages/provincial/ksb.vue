@@ -254,8 +254,6 @@
 		},
 		mounted() {
 			this.bmmcname=this.$route.query.bmmc 
-			console.log(this.$route.query.bmmc,"^^^^^^^")
-			console.log(this.bmmcname,"^^^^^^^1")
 
 			this.$nextTick(() => {
 				this.getSqxxDetail();

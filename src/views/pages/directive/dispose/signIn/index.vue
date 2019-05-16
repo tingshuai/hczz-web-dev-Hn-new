@@ -179,7 +179,7 @@
 			},
 			rendtable() {
 				this.loading = true
-				api.api('post', api.configUrl + '/hczz/zl/queryZldwdlList', this.basePage).then(res => {
+				api.api('post', api.configUrl + '/hczz/zl/queryZldwdlListWithTime', this.basePage).then(res => {
 					this.list = res.list;
 					this.total = res.total;
 					this.loading = false

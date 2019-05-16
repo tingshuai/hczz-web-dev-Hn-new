@@ -7,7 +7,7 @@
 					<Button type="primary" v-show="!disabled" class="sureBtn" @click="sure">确定</Button>
 				</div>
 				<div  style="height: 500px;">
-					<el-tabs v-model="activeName"  @tab-click="handleClick" style="height: 450px;">
+					<el-tabs v-model="activeName"  @tab-click="handleClick">
 						<el-tab-pane label="研判结果" name="result">
 							<result :fncResult="fncResult"></result>
 						</el-tab-pane>

@@ -9,7 +9,7 @@
 					<span v-if="item.zxr">{{item.zxr}}&nbsp;&nbsp;</span>
 					<span v-if="item.czr">{{item.czr}}&nbsp;&nbsp;</span>
 					<span v-if="item.bmmc">{{item.bmmc}}&nbsp;&nbsp;</span>
-					<span v-if="item.officeName">{{item.officeName}}&nbsp;&nbsp;</span>
+					<!-- <span v-if="item.officeName">{{item.officeName}}&nbsp;&nbsp;</span> -->
 					<slot name="content"></slot>
 				</p>
 				<p class="right_remark" v-if="item.remark">{{item.remark}}</p>
@@ -45,7 +45,7 @@
 
 <style lang="less" scoped>
 	.step {
-		height: 446px;
+		height: 420px;
         /*overflow: auto;*/
 		margin-top:20px;
 		margin-left:20px;

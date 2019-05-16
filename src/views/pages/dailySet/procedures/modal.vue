@@ -6,8 +6,8 @@
 					<Button type="default" class="cancelBtn" @click="cancelBtn">取消</Button>
 					<Button type="primary" class="sureBtn" @click="sure">确定</Button>
 				</div>
-				<div style="height: 450px;overflow: auto;">
-					<el-tabs v-model="activeName" @tab-click="handleClick" style="height: 450px;">
+				<div style="height: 481px;">
+					<el-tabs v-model="activeName" @tab-click="handleClick">
 						<el-tab-pane label="流程轨迹" name="handle">
 							<handle  :fncHandel="fncHandel"></handle>
 						</el-tab-pane>

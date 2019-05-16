@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="dialog0_9">
 		<div class="clearfix tableStyle">
 			<step :list="directFlow"></step>
 		</div>

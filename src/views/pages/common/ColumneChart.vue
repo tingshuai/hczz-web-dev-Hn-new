@@ -1,9 +1,9 @@
 <template>
 	<div class="bar">
-		<p class="op">
+		<div class="op">
 			<img src="../../../images/home/office.png" alt="" />
 			<span>部门数据</span>
-		</p>
+		</div>
 		<div class="ColumneChart" ref="ColumneChart"></div>
 	</div>
 </template>
@@ -140,7 +140,7 @@
 	}
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 	.bar {
 		background: #e6e6e6;
 		width: 53%;
@@ -153,6 +153,8 @@
 			line-height: 40px;
 			border-bottom: 1px solid #eee;
 			background: rgb(250, 250, 250);
+			display: flex;
+			align-items: center;
 			img {
 				margin-left: 18px;
 				margin-right: 10px;

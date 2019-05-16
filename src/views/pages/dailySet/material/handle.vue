@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="dialog0_9">
 		<div class="clearfix tableStyle">
 			<div class="tablemmp margin-bottom-20" v-if="sxzt==1&&dqzt=='a'">
 				<table border="1" cellspacing="0">

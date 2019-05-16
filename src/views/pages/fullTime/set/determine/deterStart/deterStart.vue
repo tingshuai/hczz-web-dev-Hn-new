@@ -8,7 +8,7 @@
             </div>
             <div class="right">
                 <!--<Button>处理流程</Button>-->
-                <Button @click="membersBtn">小组成员</Button>
+                <Button @click="membersBtn">处理部门</Button>
                 <Button @click="flowsheetBtn">处理日志</Button>
             </div>
         </div>

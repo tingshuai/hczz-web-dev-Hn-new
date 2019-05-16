@@ -7,7 +7,7 @@
 					<Button type="default" class="cancelBtn" v-if="approveZt=='y'" @click="cancelBtn">关闭</Button>
 					<Button type="primary" class="sureBtn" v-if="approveZt=='n'" @click="sure">确定</Button>
 				</div>
-				<div style="height: 450px;overflow: auto;">
+				<div style="height: 481px;">
 					<el-tabs v-model="activeName"  @tab-click="handleClick">
 						<el-tab-pane label="流程轨迹" name="handle">
 							<handle ref="handle" :hadleFn="handleFn"></handle>

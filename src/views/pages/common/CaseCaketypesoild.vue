@@ -1,10 +1,12 @@
 <template>
 	<div class="pie">
-		<p class="op">
-			<img src="@/images/home/person.png" alt="" />
-			<span>个人数据</span>
+		<div class="op">
+			<section>
+				<img src="@/images/home/person.png" alt="" />
+				<span>个人数据</span>
+			</section>
 			<img src="@/images/home/back.png" @click="back" class="backImg"/>
-		</p>
+		</div>
 		<div class="CaseCaketypesoild" ref="CaseCaketypesoild"></div>
 		<ul>
 			<li v-for="(item,index) in rightCont" :key="index">
@@ -118,7 +120,7 @@
 	}
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 	.pie {
 		width: 45%;
 		height: 300px;
@@ -131,9 +133,11 @@
 			line-height: 40px;
 			border-bottom: 1px solid #eee;
 			background: rgb(250,250,250);
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
 			img{
 				margin-left: 18px;
-				margin-right: 10px;
 			}
 			.backImg{
 				float: right;

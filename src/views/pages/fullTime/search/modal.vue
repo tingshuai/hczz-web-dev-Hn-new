@@ -5,17 +5,17 @@
 				<div slot="footer" class="font-size-0">
 					<Button type="default" class="cancelBtn" @click="cancelBtn">关闭</Button>
 				</div>
-				<div  style="height: 450px;overflow: auto;">
-					<el-tabs v-model="activeName"  @tab-click="handleClick" style="height: 450px;">
+				<div  style="height: 481px;">
+					<el-tabs v-model="activeName"  @tab-click="handleClick">
 						
 						<el-tab-pane label="流程轨迹" name="handle">
 							<handle :fncHandle='fncHandle'></handle>
 						</el-tab-pane>
-						<el-tab-pane label="反馈结果" name="result">
-							<result :fncResult="fncResult"></result>
-						</el-tab-pane>
 						<el-tab-pane label="详细信息" name="detail">
 							<detail :fncDetail="fncDetail"></detail>
+						</el-tab-pane>
+						<el-tab-pane label="反馈结果" name="result">
+							<result :fncResult="fncResult"></result>
 						</el-tab-pane>
 					</el-tabs>
 				</div>

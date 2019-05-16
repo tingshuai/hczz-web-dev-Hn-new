@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="dialog0_9">
 		<div class="clearfix tableStyle">
 			<table border="1" cellspacing="0">
 				<tr v-if="detailObj.rwly==2">
