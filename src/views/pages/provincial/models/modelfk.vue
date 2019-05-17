@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-dialog class="modal-ct workBench-group-modal" :title="'编号：'+xcObj.sqwh" @close='closeModel' :visible.sync="visible" :modal-append-to-body='false' width="700px">
-			<el-form :model="formValidate" ref="ruleForm" label-width="100px" class="demo-ruleForm" :rules="rules">
+			<el-form :model="formValidate" ref="ruleForm" label-width="100px" class="demo-ruleForm" :rules=" states ? rules : null">
 				<el-row>
 					<el-col :span="12">
 						<el-form-item label="申请人：">
@@ -163,11 +163,10 @@ export default {
     methods: {
         closeModel() {
             let that = this
+			// this.$emit('closeModel', that.$refs.ruleForm, that.$refs.proceUpload)
+			// this.$emit('qqxcdfkcloseModel', that.$refs.ruleForm, that.$refs.proceUpload)
+			this.$refs.ruleForm.resetFields();
             that.visible = false
-			this.$refs.proceUpload.clearFiles()
-			this.$refs.ruleForm.clearValidate();
-			this.$emit('closeModel', that.$refs.ruleForm, that.$refs.proceUpload)
-			this.$emit('qqxcdfkcloseModel', that.$refs.ruleForm, that.$refs.proceUpload)
         },
         saveInfo() {
 			this.$emit('saveInfo')

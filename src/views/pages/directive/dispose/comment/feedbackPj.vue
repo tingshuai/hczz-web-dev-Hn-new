@@ -37,7 +37,7 @@
 				</tr>
 				<tr>
 					<th>反馈内容</th>
-					<th colspan="3" :title="feedBackDetial.fknr">{{feedBackDetial.fknr}}</th>
+					<th colspan="3" :title="feedBackDetial.fknr" class="breakWord">{{feedBackDetial.fknr}}</th>
 				</tr>
 				<tr>
 					<th>反馈附件</th>

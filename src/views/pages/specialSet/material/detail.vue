@@ -28,7 +28,7 @@
 				</tr>
 				<tr>
 					<th>简要任务内容</th>
-					<th colspan="3" :title="detailObj.jyrwnr" class="text-overflow">{{detailObj.jyrwnr}}</th>
+					<th colspan="3" :title="detailObj.jyrwnr" class="breakWord">{{detailObj.jyrwnr}}</th>
 				</tr>
 				<tr>
 					<th>任务附件</th>
@@ -81,7 +81,7 @@
 				</tr>
 				<tr>
 					<th>简要任务内容</th>
-					<th colspan="3" :title="sqxxObj.jyrwnr" class="text-overflow">{{sqxxObj.jyrwnr}}</th>
+					<th colspan="3" :title="sqxxObj.jyrwnr" class="breakWord">{{sqxxObj.jyrwnr}}</th>
 				</tr>
 				<tr>
 					<th>任务附件</th>

@@ -17,7 +17,7 @@
 					<tr>
 						<th style="height:80px">反馈内容</th>
 						<th :colspan="3">
-							<p style="text-overflow: ellipsis;overflow: hidden;" :title="item.fknr">{{item.fknr}}</p>
+							<p class="breakWord" :title="item.fknr">{{item.fknr}}</p>
 						</th>
 					</tr>
 					<tr>

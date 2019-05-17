@@ -10,7 +10,7 @@
 				</tr>
 				<tr>
 					<th>反馈内容</th>
-					<th colspan="3">{{detailObj.cznr}}</th>
+					<th colspan="3" class="breakWord">{{detailObj.cznr}}</th>
 				</tr>
 				<tr>
 					<th>反馈附件</th>

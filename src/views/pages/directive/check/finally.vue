@@ -19,7 +19,7 @@
 				</tr>
 				<tr>
 					<th>反馈内容</th>
-					<th :colspan="3" :title="feedBackDetial.fknr" style="overflow: hidden;text-overflow: ellipsis;">{{feedBackDetial.fknr}}</th>
+					<th :colspan="3" :title="feedBackDetial.fknr" class="breakWord">{{feedBackDetial.fknr}}</th>
 				</tr>
 			</table>
 		</div>

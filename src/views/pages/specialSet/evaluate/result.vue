@@ -10,7 +10,7 @@
 				</tr>
 				<tr>
 					<th>反馈内容</th>
-					<th colspan="3" :title="detailObj.fknr" class="text-overflow">{{detailObj.fknr}}</th>
+					<th colspan="3" :title="detailObj.fknr" class="breakWord">{{detailObj.fknr}}</th>
 				</tr>
 				<tr>
 					<th>反馈附件</th>

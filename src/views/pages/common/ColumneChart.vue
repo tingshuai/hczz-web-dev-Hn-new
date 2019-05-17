@@ -1,10 +1,12 @@
 <template>
 	<div class="bar">
-		<div class="op">
-			<img src="../../../images/home/office.png" alt="" />
+		<p class="op">
+			<img style="margin-right: 0px;" src="../../../images/home/office.png" alt="" />
 			<span>部门数据</span>
+		</p>
+		<div class="ColumneChart" ref="ColumneChart">
+			<p class="noData">暂无数据</p>
 		</div>
-		<div class="ColumneChart" ref="ColumneChart"></div>
 	</div>
 </template>
 
@@ -27,27 +29,13 @@
 				name: [],
 				chartData: [],
 				xAxisTitle: [],
-				chartData: [],
 				myChart: null,
 			};
 		},
 		watch: {
 			echarttop() {
-				this.chartData = this.echarttop[1].childrenList.map(item => {
-					return {
-						value: item.name,
-						name: item.code,
-						dat: item.childrenList
-					}
-				})
-				console.log(this.chartData)
-				this.name = this.chartData.map(item => {
-					return {
-						value: item.dat,
-					}
-				})
 				this.initEcharts();
-			}
+			},
 		},
 		mounted() {
 			this.__resizeHanlder = debounce(() => {
@@ -59,25 +47,29 @@
 		},
 		methods: {
 			initEcharts() {
+				let _xAxisData = [],_series = [{
+					data:[],
+					name:"处理中",
+					type:'bar'
+				},{
+					data:[],
+					name:"已完成",
+					type:'bar'
+				}];
+				this.echarttop[1].childrenList.forEach((val,i,arr)=>{
+					_xAxisData.push(val.name);//填充X轴....
+					// let dd = val.childrenList.findIndex((item)=>item.code == 'clz');
+					if( val.childrenList.findIndex((item)=>item.code == 'clz') != -1 ){
+						let _itemClz = val.childrenList[val.childrenList.findIndex((item)=>item.code == 'clz')];//处理中
+						_series[0].data.push( _itemClz.count );//填充处理中呢一组...
+						_series[1].data.push( val.count - _itemClz.count );//填充已完成呢一组...
+					}else{
+						_series[0].data.push( 0 );//填充处理中呢一组...
+						_series[1].data.push( val.count );//填充已完成呢一组...						
+					}
+				})
 				this.myChart = this.$echarts.init(this.$refs.ColumneChart);
-				let dagendData = [];
-				let series = [];
-				this.chartData[0].dat.forEach(item => {
-					dagendData.push(item.name)
-				})
-				dagendData.forEach((item, i) => {
-					let dats = [];
-					this.chartData.forEach((n, m) => {
 
-						dats.push(n.dat[i].count)
-
-					})
-					series.push({
-						name: item,
-						type: 'bar',
-						data: dats
-					})
-				})
 				var option = {
 					backgroundColor: '#fff',
 					color: ['#5eb2ed', '#c8b7e9'],
@@ -88,8 +80,9 @@
 						}
 					},
 					legend: {
-						data: dagendData,
-						left: 'right'
+						right:'0',
+						top:"5px",
+						data:["处理中","已完成"]
 					},
 					toolbox: {
 						show: false
@@ -101,7 +94,7 @@
 							show: false
 						},
 						boundaryGap: ['50%', '80%'],
-						data: this.chartData,
+						data: _xAxisData,
 						axisLine: {
 							lineStyle: {
 								color: '#ddd'
@@ -129,35 +122,42 @@
 							fontSize: 14
 						}
 					}],
-					series: series
+					series: _series
 				};
 				this.myChart.setOption(option);
 				//              this.myChart.group = 'mygroup';
-
 			}
 
 		}
 	}
 </script>
-
 <style lang="less" scoped>
 	.bar {
-		background: #e6e6e6;
+		background: white;
 		width: 53%;
 		height: 300px;
 		box-shadow: #999 0 0 5px;
 		border-radius: 8px;
 		margin-left: 2%;
+		.ColumneChart{
+			display: flex;
+			justify-content: center;
+			align-items: center;	
+		}
 		.op {
 			height: 40px;
 			line-height: 40px;
 			border-bottom: 1px solid #eee;
 			background: rgb(250, 250, 250);
-			display: flex;
-			align-items: center;
 			img {
-				margin-left: 18px;
-				margin-right: 10px;
+				display: inline-block;
+				vertical-align: middle;
+				margin-left: 15px;
+				margin-right: 15px;
+			}
+			span{
+				display: inline-block;
+				vertical-align: middle;
 			}
 		}
 	}
