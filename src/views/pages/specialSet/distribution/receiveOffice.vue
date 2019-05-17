@@ -85,6 +85,7 @@
 			onResultClick(item) {
 				this.selectedDate = [{
 					id: item.officeId,
+					officeCode: item.officeCode,
 					title: item.officeName
 				}]
 			},

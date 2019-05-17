@@ -118,6 +118,9 @@
 					this.getUser(val);
 				}
 			},
+			receiveOfficeArr(n){
+				this.getPeopleList(n);
+			},			
 			'formDynamic.blrid'(val){
 				if(val){
 					let arr=this.userList.filter(item=>{
@@ -132,6 +135,11 @@
             
 		},
 		methods: {
+			getPeopleList(val){
+				api.api('get',api.systemUrl+'/account/info/queryPage2?officeCode='+val[0].officeCode || val[0].code+'&pageSize=1000000&pageNum=1').then(res=>{
+                    this.userList=res.list;
+				})
+			},			
 			cancelBtn(){
 				this.$emit('update');
 				this.$refs.approve.resetFields();

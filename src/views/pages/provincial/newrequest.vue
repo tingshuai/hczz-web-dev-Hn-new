@@ -29,9 +29,9 @@
             <Button type="primary" class="searchBtn" @click="add('new')">新建</Button>
             <!-- <el-button type="primary"  @click="add()" size="small">新建</el-button> -->
         </Form>
-
-        <el-dialog class="modal-ct workBench-group-modal thetree" :title="title" @close='closeModel' :visible.sync="visible" append-to-body width="1030px">
-            <el-form :model="formValidate" ref="ruleForm" :rules="rules" label-width="100px" class="demo-ruleForm">
+        <div v-if="visible">
+        <el-dialog class="modal-ct workBench-group-modal thetree" :title="title" @close='closeModel' :visible="visible" append-to-body width="1030px">
+            <el-form :model="formValidate" ref="ruleForm" :rules="flag ? rules :null" label-width="100px" class="demo-ruleForm">
                 <el-row>
                     <el-col :span="12">
                         <el-form-item label="申请人：">
@@ -202,6 +202,8 @@
                 <el-button v-if="flag" type="primary" class="sureBtn successBtn" @click="saveInfo" size="small" :loading="xjloading">确定</el-button>
             </div>
         </el-dialog>
+
+        </div>
         <el-dialog width="80%" title="选择案件信息" append-to-body class="dialogAjxx" :visible.sync="showDialogAjxx">
             <model-ajxx @selectAjxx="selectAjxx"></model-ajxx>
             <div slot="footer" class="dialog-footer">
@@ -753,6 +755,7 @@
         text-overflow: ellipsis;
         word-wrap: break-word;
         overflow: hidden;
+        vertical-align: top;
     }
 
     .file .el-form-item__content {

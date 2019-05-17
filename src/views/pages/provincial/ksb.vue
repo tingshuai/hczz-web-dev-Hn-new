@@ -1,794 +1,580 @@
 <template>
-	<div class="bodyWrap" style="overflow-y: auto;background:#fff">
-
-		<!--上部右侧部分-->
-		<div style="clear:both">
-			<div class="lcTop">
-				<div class="startJ">
-					<!--开始标记-->
-					<div style="color:#4fbf39">
-						开始
+		<div class="bodyWrap">
+			<div style="" class="bottom-div">
+				<div class="lcTop flex0">
+					<div class="startJ flex0">
+						<!--开始标记-->
+						<div>开始</div>
+						<i class="top-x"></i>
 					</div>
-					<i class="startX" style="margin-left:5px"></i>
+					<ul class="bottom-ul flex0">
+						<li class="bottom-approve flex0">
+							<div class="bottom-recive">
+								<div class="recive">
+									<div class="lcInfo-t cl fq-spr flex0">
+										<div class="headImg">
+											<img src="@/images/ksh/img_p_two.png">
+										</div>
+										<div class="userMsg">
+											<p :title="flowData.flowMsg.zxr || 'XXX'" class="lancolor">{{flowData.flowMsg.zxr || "XXX" | subString(6)}}</p>
+											<p :title="flowData.flowMsg.bmmc">{{flowData.flowMsg.bmmc | subString(16) }}</p>
+										</div>
+									</div>
+									<div class="line flex0"></div>
+									<div class="lcInfo-c flex0">
+										<p>{{flowData.flowMsg.czsj | timestampToTime}}</p>
+										<div class="lcInfo-c1">
+											<p class="green">发起请求</p>
+											<div>
+												<Icon type="md-checkmark" class="md-checkmark"/>											
+												<i class="angle"></i>
+											</div>
+										</div>
+									</div>								
+								</div>
+							</div>	
+						</li>
+						<!-- <i class="top-y" v-show="flowData.flowBody.length!=0"></i> -->
+					</ul>
 				</div>
-				<ul class="lcTopUl">
-					<li class="sprLi">
-
-						<div class="lcInfo-t cl ks-spr" style="height: 80px; padding:15px 10px 0; border-radius: 8px 8px 0 0;">
-							<img src="../../../images/ksh/img_p_two.png" class="fl">
-							<div class="fl zdInfo" style="padding-top:5px;">
-								<p :title="fqr.zxr" class="whiteColor">{{fqr.zxr}}</p>
-								<p :title="fqr.bmmc" class="whiteColor">{{fqr.officeName}}</p>
+                <!-- 审核 -->
+				<ul style="" class="bottom-ul flex0 sh" v-if="flowData.spMsg.length">
+					<!-- <div class="line_center"></div> -->
+					<i class="top-x flex0"></i>
+					<div class="list flex0">
+						<li class="bottom-approve" :class="flowData.spMsg.length > 1 ? 'getLine' : ''" v-for="(item,index) in flowData.spMsg" :key="index">
+							<!--虚线框内-->
+							<div class="bottom-recive flex0" :class="item.czlx == '审批同意' || item.czlx == '审批不同意' ? '' : 'filterGray'">
+								<i class="top-x flex0" v-if="flowData.spMsg.length > 1"></i>
+								<div class="recive flex0">
+									<div class="lcInfo-t flex0">
+										<div class="headImg">
+											<img src="@/images/ksh/img_p_two.png">
+										</div>
+										<div class="userMsg">
+											<p :title="item.zxr || 'XXX'" class="lancolor">{{item.zxr || 'XXX' | subString(6)}}</p>
+											<p :title="item.bmmc">{{item.bmmc | subString(16) }}</p>
+										</div>
+									</div>
+									<div class="line flex0"></div>
+									<div class="lcInfo-c flex0">
+										<p v-if="item.czsj">{{item.czsj | timestampToTime}}</p>
+										<p v-else>XXXX-XX-XX XX:XX:XX</p>
+										<div class="lcInfo-c1"><!--判断条件不足暂时用文字判断-->
+											<p :class="item.czlx == '审批同意' ? 'green' : 'yellow'">{{ item.czlx }}</p>
+											<div v-if="item.czlx != '待审批'" :class="item.czlx == '审批同意' ? 'green' : 'yellow'">
+												<Icon type="md-checkmark" class="md-checkmark"/>											
+												<i class="angle"></i>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
-						</div>
-
-						<div class="lcInfo-b lcInfo-c" style="padding:0 10px">
-							<p title="发起任务" class="whiteColor">发起请求协查</p>
-							<p :title="fqr.czsj" class="whiteColor">{{fqr.czsj | timestampToTime}}</p>
-						</div>
-						<i class="right-x"></i>
-					</li>
+							<i class="liney flex0" v-if="flowData.spMsg.length > 1"></i>
+						</li>
+					</div>				
+				</ul>                
+				<ul style="" class="bottom-ul flex0">
+					<!-- <div class="line_center"></div> -->
+					<div class="list flex0">
+						<li class="bottom-approve flex0" :class="flowData.flowBody.length > 1 ? 'getLine' : ''" v-for="(item,index) in flowData.flowBody" :key="index">
+							<!--虚线框内-->
+							<div class="bottom-recive flex0">
+								<i class="top-x flex0"></i>
+								<div class="recive flex0" :class="Number(item.zt) >= 2 && Number(item.zt) <= 6 || Number(item.zt) == 8 ? '' : 'filterGray'">
+									<div class="lcInfo-t flex0">
+										<div class="headImg">
+											<img src="@/images/ksh/img_p_two.png">
+										</div>
+										<div class="userMsg">
+											<p :title="item.qsrxm || 'XXX'" class="lancolor">{{item.qsrxm || 'XXX' | subString(6)}}</p>
+											<p :title="item.jsdwmc">{{item.jsdwmc | subString(16) }}</p>
+										</div>
+									</div>
+									<div class="line flex0"></div>
+									<div class="lcInfo-c flex0">
+										<p v-if="item.qssj">{{item.qssj | timestampToTime}}</p>
+										<p v-else>XXXX-XX-XX XX:XX:XX</p>
+										<div class="lcInfo-c1">
+											<p :class="Number(item.zt) >= 2 && Number(item.zt) <= 6 ? 'green' : 'yellow' ">{{ Number(item.zt) == 8 ? '拒绝签收' : Number(item.zt) >= 2 && Number(item.zt) <= 6 ? '已签收' : '待签收' }}</p>
+											<div v-if="(Number(item.zt) >= 2 && Number(item.zt) <= 6)||Number(item.zt) == 8" :class="Number(item.zt) == 8 ? 'yellow' : 'green' ">
+												<Icon type="md-checkmark" class="md-checkmark"/>											
+												<i class="angle"></i>
+											</div>
+										</div>
+									</div>
+								</div>
+								<i class="top-x flex0" style="margin-top:10px;"></i>
+								<div class="recive flex0" :class="Number(item.zt) >= 3 && Number(item.zt) <= 6 ? '' : 'filterGray'">
+									<div class="lcInfo-t flex0">
+										<div class="headImg">
+											<img src="@/images/ksh/img_p_two.png">
+										</div>
+										<div class="userMsg">
+											<p :title="item.fkrxm || 'XXX'" class="lancolor">{{item.fkrxm || 'XXX' | subString(6)}}</p>
+											<p :title="item.jsdwmc">{{item.jsdwmc | subString(16) }}</p>
+										</div>
+									</div>
+									<div class="line flex0"></div>
+									<div class="lcInfo-c flex0">
+										<p v-if="item.fksj">{{ item.fksj | timestampToTime }}</p>
+										<p v-else>XXXX-XX-XX XX:XX:XX</p>
+										<div class="lcInfo-c1">
+											<p :class="Number(item.zt) >= 3 && Number(item.zt) <= 6 ? 'green' : 'yellow'">{{ Number(item.zt) >= 3 && Number(item.zt) <= 6 ? '已反馈' : '待反馈' }}</p>
+											<div v-if="Number(item.zt) >= 3 && Number(item.zt) <= 6">
+												<Icon type="md-checkmark" class="md-checkmark"/>											
+												<i class="angle"></i>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--虚线框外-->
+							<i class="top-x flex0" style="margin-top:10px;"></i>
+							<div class="recive flex0" :class="Number(item.zt) == 5 || Number(item.zt) == 6 ? '' : 'filterGray'">
+								<div class="lcInfo-t cl pj-spr flex0">
+									<div class="headImg">
+										<img src="@/images/ksh/img_p_two.png">
+									</div>
+									<div class="userMsg">
+										<p :title="item.pjr || 'XXX'" class="lancolor">{{item.pjr || 'XXX' | subString(6) }}</p>
+										<p :title="item.pjbmmc || flowData.flowMsg.bmmc" style="font-size: 12px;">{{item.pjbmmc || flowData.flowMsg.bmmc | subString(16) }}</p><!--评价部门应和发起部门相同-->
+									</div>
+								</div>
+								<div class="line flex0"></div>
+								<div class="lcInfo-c flex0">
+									<p style="font-size: 12px;" v-if="item.pjrq">{{ item.pjrq | timestampToTime }}</p>
+									<p style="font-size: 12px;" v-else>XXXX-XX-XX XX:XX:XX</p>
+									<div class="lcInfo-c1">
+										<p :class="Number(item.zt) == 5 || Number(item.zt) == 6 ? 'green' : 'yellow'">{{ Number(item.zt) == 5 || Number(item.zt) == 6 ? '已评价' : '待评价' }}</p>
+										<div v-if="Number(item.zt) == 5 || Number(item.zt) == 6">
+											<Icon type="md-checkmark" class="md-checkmark"/>											
+											<i class="angle"></i>
+										</div>
+									</div>									
+								</div>
+							</div>
+							<!-- <i class="top-y" v-show="flowData.flowBody!=1"></i> -->
+						</li>
+					</div>
+					<!-- <div class="line_center"></div> -->
+					<i class="top-x flex0"></i>
+					<span class="end-box flex0" :class="{'green':flowData.flowBody[0].zt=='5' || flowData.flowBody[0].zt=='6'}"><!--当判断是已完成（5：已完成，6：出战果）显示为绿色-->
+						<span class="end">结束</span>
+					</span>					
 				</ul>
 			</div>
-			<div class="top-right xwbg topright" ref="topright" id="ab" style="margin-top: -17px;position: absolute;left:387px;">
-				<!-- <div class="top-rightone path-flow-ct" style="max-width:550px; min-height: 173px;" :style="sprList.length!=2 ? 'padding-right:16px' :((sprList.length === 0)  ? 'min-width: 550px': '') "> -->
-				<div class="top-rightone path-flow-ct" style="max-width:550px; min-height: 173px;" :style="sprList.length===0 ? 'min-width:500px' :((sprList.length !=2 )  ? 'padding-right:16px': '') ">
-
-					<el-scrollbar v-if="sprList.length >0" tag="ul" ref="scrollbar" wrap-class="el-scrollbar__wrap" view-class="el-scrollbar__view" :class="{'scrollbar-path-flow':isScrolltop}" class="path-flow">
-						<li class="box" v-for="(item,index) in sprList" :key="index" style="background:#f9f8f9;display:block" :style="sprList.length == 1 ?'margin:0 auto':''">
-							<div class=" flow-step-ct" style="display: inline-block;" :style="{background:!item.czlx.includes('待审批')?'#fff':'f9f8f9',color:!item.czlx.includes('待审批')?'#5b5b5b':'#5b5b5b'}">
-								<div class="newdiv" :style="{background:!item.czlx.includes('待审批')>0?'#5b5b5b':'#fff'}">
-									<img src="../../../images/ksh/img_p_two.png" class="fl">
-									<div class="fl zdInfo calcWidth">
-										<p :style="{color:!item.czlx.includes('待审批')?'#fff':'#5b5b5b'}">{{item.zxr}}</p>
-										<p :style="{color:!item.czlx.includes('待审批')?'#fff':'#5b5b5b'}">{{item.officeName}}</p>
-									</div>
-								</div>
-								<div class="newdata lcInfo-c">
-									<p :style="{color:!item.czlx.includes('待审批')?'#5b5b5b':'#5b5b5b'}" title="审批">{{item.czlx}}</p>
-									<p :style="{color:!item.czlx.includes('待审批')?'#5b5b5b':'#5b5b5b'}" :title="item.czsj">{{item.czsj|timestampToTime}}</p>
-								</div>
-							</div>
-						</li>
-					</el-scrollbar>
-					<li v-if="sprList.length == 0" class="box" style="margin-left:23%">
-						<div class=" flow-step-ct" style="display: inline-block;" >
-							<div class="newdiv">
-								<img src="../../../images/ksh/img_p_two.png" class="fl">
-								<div class="fl zdInfo calcWidth">
-									<p >{{bmmcname}}</p>
-								</div>
-							</div>
-							<div class="newdata lcInfo-c">
-								<p>待审批</p>
-							</div>
-						</div>
-					</li>
-				</div>
-				<i class="right-x" style="top: 93px;" v-if="noAgree"></i>
-				<span class="noAgree-box" v-if="noAgree">
-						<span class="end">结束</span>
-				</span>
-			</div>
 		</div>
-
-		<!--签收反馈-->
-		<div>
-			<div class="qsDiv " :style="{position:'absolute','left':dvalue+'px'}" v-if="!noAgree">
-				<div class="qsdivone path-flow-ct" style="display:block">
-					<i class="bottom-x"></i>
-					<el-scrollbar tag="ul" v-if="qsList.length == 2" ref="scrollbar" wrap-class="el-scrollbar__wrap" view-class="el-scrollbar__view" :class="{ 'scrollbar-path-flow':isScroll}" class="path-flow">
-						<li class="bottom-recive" v-for="(item,index) in qsList" :key="index" :style="sprList.length == 1 ?'margin:0 auto':''">
-							<div class="recive flow-step-ct" style="display:block;" :style="{background:item.zxr?'#fff':'f9f8f9',color:item.zxr?'#5b5b5b':'#5b5b5b'}">
-								<div class="lcInfo-t qs-spr newdiv" :style="{background:item.zxr?'#fff':'f9f8f9',color:item.zxr?'#5b5b5b':'#5b5b5b'}">
-									<img src="../../../images/ksh/img_p_two.png" class="fl">
-									<div class="calcWidth fl">
-										<p :style="{color:item.zxr?'#5b5b5b':'#5b5b5b'}">{{item.zxr}}</p>
-										<p :style="{color:item.zxr?'#5b5b5b':'#5b5b5b'}">{{item.bmmc}}</p>
-									</div>
-								</div>
-
-								<div class="newdata lcInfo-c">
-									<p :style="{color:item.zxr?'#5b5b5b':'#5b5b5b'}" :title="item.czlx">{{item.czlx}}</p>
-									<p :style="{color:item.zxr?'#5b5b5b':'#5b5b5b'}" title="item.czsj">{{item.czsj | timestampToTime}}</p>
-								</div>
-							</div>
-						</li>
-					</el-scrollbar>
-					<el-scrollbar tag="ul" v-if="qsList.length == 1" ref="scrollbar" wrap-class="el-scrollbar__wrap" view-class="el-scrollbar__view" :class="{ 'scrollbar-path-flow':isScroll}" class="path-flow">
-						<li class="bottom-recive" v-for="(item,index) in qsList" :key="index">
-							<div class="recive flow-step-ct" style="display:block;" :style="{background:item.zxr?'#fff':'f9f8f9',color:item.zxr?'#5b5b5b':'#5b5b5b'}">
-								<div class="lcInfo-t qs-spr newdiv" :style="{background:item.zxr?'#fff':'f9f8f9',color:item.zxr?'#5b5b5b':'#5b5b5b'}">
-									<img src="../../../images/ksh/img_p_two.png" class="fl">
-									<div class="calcWidth fl">
-										<p :style="{color:item.zxr?'#5b5b5b':'#5b5b5b'}">{{item.zxr}}</p>
-										<p :style="{color:item.zxr?'#5b5b5b':'#5b5b5b'}">{{item.bmmc}}</p>
-									</div>
-								</div>
-
-								<div class="newdata lcInfo-c">
-									<p :style="{color:item.zxr?'#5b5b5b':'#5b5b5b'}" :title="item.czlx">{{item.czlx}}</p>
-									<p :style="{color:item.zxr?'#5b5b5b':'#5b5b5b'}" title="item.czsj">{{item.czsj | timestampToTime}}</p>
-								</div>
-							</div>
-						</li>
-						<li class="bottom-recive" v-if="qsList.length == 1">
-							<div class="recive flow-step-ct" style="display:block;">
-								<div class="lcInfo-t qs-spr newdiv" >
-									<img src="../../../images/ksh/img_p_two.png" class="fl">
-									<div class="calcWidth fl">
-										<p>{{bmmcname}}</p>
-									</div>
-								</div>
-								<div class="newdata lcInfo-c">
-									<p >待反馈</p>
-								</div>
-							</div>
-						</li>
-					</el-scrollbar>
-					<li class="bottom-recive" v-if="qsList.length == 0" :style="sprList.length == 1 ?'margin:0 auto':''">
-							<div class="recive flow-step-ct" style="display:block;">
-								<div class="lcInfo-t qs-spr newdiv" >
-									<img src="../../../images/ksh/img_p_two.png" class="fl">
-									<div class="calcWidth fl">
-										<p>{{bmmcname}}</p>
-									</div>
-								</div>
-
-								<div class="newdata lcInfo-c">
-									<p style="width:208px">待签收</p>
-								</div>
-							</div>
-					</li>
-					<li class="bottom-recive" v-if="qsList.length == 0" :style="sprList.length == 1 ?'margin:0 auto':''">
-							<div class="recive flow-step-ct" style="display:block;">
-								<div class="lcInfo-t qs-spr newdiv" >
-									<img src="../../../images/ksh/img_p_two.png" class="fl">
-									<div class="calcWidth fl">
-										<p>{{bmmcname}}</p>
-										
-									</div>
-								</div>
-
-								<div class="newdata lcInfo-c">
-									<p >待反馈</p>
-								</div>
-							</div>
-						</li>
-				</div>
-			
-			</div>
-		</div>
-		<div>
-			<!--评价-->
-			<div class="bottom-w clear  pjDiv" :style="{position:'absolute','left':dvalue2+'px'}" v-if="!noAgree">
-				<div class="bottom-wone">
-					<i class="bottom-x"></i>
-					<li v-if="pjList.length == 0">
-						<div class="lcInfo-t newdiv">
-						<img src="../../../images/ksh/img_p_two.png" class="fl">
-						<div class="calcWidth fl zdInfo">
-							<p :style="{color:pjList.length?'#5b5b5b':'#5b5b5b'}">{{fqr.zxr}}</p>
-							<p :style="{color:pjList.length?'#5b5b5b':'#5b5b5b'}">{{fqr.bmmc}}</p>
-						</div>
-						</div>
-						<div class="newdata lcInfo-c">
-							<p :style="{color:pjList.length?'#5b5b5b':'#5b5b5b'}" title="评价">待评价</p>
-							<p v-show="pjList!=0" :style="{color:pjList.length?'#5b5b5b':'#5b5b5b'}" title="pjrq.czsj">{{fqr.czsj | timestampToTime}}</p>
-						</div>
-					
-					
-						<i class="bottom-x" style="top: 175px;"></i>
-						<span class="end-box" :style="{background:pjList.length?'green':'#dcdcdc'}">
-							<span class="end">结束</span>
-						</span>
-					</li>
-					<li v-if="pjList.length > 0" v-for="(item,index) in pjList" :key="index">
-						<div class="lcInfo-t newdiv">
-						<img src="../../../images/ksh/img_p_two.png" class="fl">
-						<div class="calcWidth fl zdInfo">
-							<p :style="{color:pjList.length?'#5b5b5b':'#5b5b5b'}">{{item.zxr}}</p>
-							<p :style="{color:pjList.length?'#5b5b5b':'#5b5b5b'}">{{item.bmmc}}</p>
-						</div>
-						</div>
-						<div class="newdata lcInfo-c">
-							<p :style="{color:pjList.length?'#5b5b5b':'#5b5b5b'}" title="评价">评价</p>
-							<p :style="{color:pjList.length?'#5b5b5b':'#5b5b5b'}" title="pjrq.czsj">{{item.czsj | timestampToTime}}</p>
-						</div>
-					
-					
-						<i class="bottom-x" style="top: 175px;"></i>
-						<span class="end-box" :style="{background:pjList.length?'green':'#dcdcdc'}">
-							<span class="end">结束</span>
-						</span>
-					</li>
-				</div>
-			</div>
-		</div>
-
-	</div>
 </template>
 
 <script>
 	import api from '@/fetch/api.js';
-	import $ from 'jquery';
 	export default {
 		data() {
 			return {
-				dvalue: '', //第二层
-				dvalue1: '', //第三层
-				dvalue2: '', //研判层
-				height: 0,
-				inputStyWidth: '',
-				topright: '',
-				leftsize: 0,
-				fqr: {}, //发起人
-				sprList: [], //审批人数组
-				qsList: [], //签收数组
-				jsypList: [], //解释呢研判
-				pjList: [], //评价数组
-				sqxxDetail: [], //整个审批流程数组
-				directFlow: [],
-				noAgree: false, //不通过
-				bmmcname:''//部门名称
-
+				flowData:{
+                    flowMsg:{},
+                    spMsg:[],//审批信息....
+                    flowBody:[]//签收反馈评价信息
+                }
 			}
+        },
+        created(){},
+		mounted() {
+			this.getSqxxDetail();
 		},
-
 		computed: {
-			bmmc(){
-				return this.$route.query.bmmc
-			},
 			id() {
 				return this.$route.query.id
-			},
-			isScroll() {
-				return this.qsList.length > 2;
-			},
-			isScrolltop() {
-				return this.sprList.length > 2;
-			},
-			zt() {
-				return this.$route.query.zt
-			}
+			},			
 		},
-		mounted() {
-			this.bmmcname=this.$route.query.bmmc 
-
-			this.$nextTick(() => {
-				this.getSqxxDetail();
-				setTimeout(() => {
-					let qsWidth = $('.qsDiv').css('width').split('px')[0] - 0;
-					let abWidth = $('#ab').css('width').split('px')[0] - 0;
-					if(this.sprList.length == 1) {
-						this.dvalue = 346;
-						if(this.qsList.length == 1) {
-							this.dvalue = 351;
-							this.dvalue2 = 478;
-						} else {
-							this.dvalue = 346;
-							this.dvalue2 = 492;
-						}
-					} else {
-						if(this.qsList.length == 1) {
-							this.dvalue = 464 + (abWidth - qsWidth) / 4 + 46;
-							this.dvalue2 = 464 + (abWidth - qsWidth) / 4 + 146;
-						} else {
-							this.dvalue = 464;
-							this.dvalue2 = 609;
-						}
-						this.dvalue1 = 464 + (abWidth - qsWidth) / 4 + 46
-					}
-
-				}, 500)
-
-			})
-		},
-		created() {
-			this.$nextTick(() => {
-				this.height = document.querySelectorAll('.xwbg')[0].clientWidth
-			})
-		},
-		methods: {
-			async handleFlowData() {
-				await this.directFlowFunc.then(res => {
-					this.directFlow = JSON.parse(res.split('/')[0]);
-					if(this.directFlow[this.directFlow.length - 1].czlx.includes('待审批')) {
-						this.isSp = true;
-					} else {
-						this.isSp = false;
-					}
-					this.zt = res.split('/')[1];
-				})
-				this.handleData()
-			},
-			getSqxxDetail() {
-				api.api('get', api.configUrl + '/hczz/qqxc/getFlow/' + this.id, {
-					type: '2'
-				}).then(res => {
-					this.sqxxDetail = res.clrzList;
-					this.fqr = this.sqxxDetail.filter(item => {
-						return item.czlx.includes('发起') == true
-					})[0];
-					this.fqr = this.getOffice(this.fqr);
-					this.sprList = this.sqxxDetail.filter(item => {
-						return item.czlx.includes('审批') == true
-					})
-					console.log(this.sprList.length,"POPOPO")
-					let brr=[];
-				    brr = this.sqxxDetail.filter(item => {
-						return item.czlx.includes('审批不同意') == true
-					})
-				    console.log(brr.length)
-					if(brr.length) {
-						this.noAgree = true;
-					} else {
-						this.noAgree = false;
-					}
-					this.sprList = this.getOffice(this.sprList);
-					this.qsList = this.sqxxDetail.filter(item => {
-						return item.czlx.includes('签收') == true || item.czlx.includes('反馈') == true
-					})
-					this.qsList = this.getOffice(this.qsList);
-					this.jsypList = this.sqxxDetail.filter(item => {
-						return item.czlx.includes('研判结束') == true
-					})
-					this.jsypList = this.getOffice(this.jsypList);
-					this.pjList = this.sqxxDetail.filter(item => {
-						return item.czlx.includes('总结') == true
-					})
-					console.log(this.pjList.length,"HJHJ")
-				})
-			},
-			getOffice(arr) {
-				if(arr[0]) {
-					arr.forEach(item => {
-						api.api('get', api.systemUrl + '/account/info/detail?id=' + item.zxrid).then(result => {
-							this.$set(item, 'officeName', result.officeName)
-						})
-					})
-				} else {
-					api.api('get', api.systemUrl + '/account/info/detail?id=' + arr.zxrid).then(result => {
-						this.$set(arr, 'officeName', result.officeName)
-					})
+		filters: {
+			ztFilter(val) {
+				switch(val) {
+					case '0':
+						return '未审核'
+						break;					
+					case '1':
+						return '已审核'
+						break;
+					case '2':
+						return '已签收'
+						break;
+					case '3':
+						return '已反馈'
+						break;
+					case '4':
+						return '已研判'
+                        break;
+					case 'a':
+						return '审批中'
+						break;       
+					case '5':
+						return '已评价'
+						break;   	
+					case '6':
+						return '已完成'
+						break; 
+					case '7':
+						return '审批不通过'
+						break;
+					case '8':
+						return '拒绝签收'
+						break;												  											                 
+					default:
+						break;
 				}
-				return arr
-			}
+			},
+			subString(val,cont){//当字符超过16个时加省略号....
+				if(val){
+					if(val.length > cont){
+						return val.substr(0,cont) + '...';
+					}else{
+						return val;
+					}
+				}else{
+					return 'XXX XXX'
+				}
+			}			
+		},		
+		methods: {
+			getSqxxDetail() {
+                let that = this;
+				api.api('get', api.configUrl + '/hczz/qqxc/getFlow/' + this.id+'?type=2').then(res => {
+                    res.clrzList.map((val,i,arr)=>{
+                        if( val.czlx.indexOf("审批") != -1 ){
+							that.flowData.spMsg.push(val);
+                        }
+                        if( val.czlx == "发起请求" ){
+                            that.flowData.flowMsg = val;
+                        }
+                    })
+					that.getflowBody();
+				})
+            },
+            getflowBody(){//请求签收反馈信息
+				api.api('get', api.configUrl + '/hczz/qqxc/getDetailById?sqid=' + this.id).then(res => {
+					if(res.data.zt == 'a'){
+						res.data.zt = 0.5;
+					}
+					this.flowData.flowBody = [res.data];
+					this.getPj();
+				})
+            },
+            getPj(){//请求评价详情
+                let that = this;
+				api.api('post', api.configUrl + '/hczz/hc/pj/getPjDetal', { id: this.id }).then(result => {
+					if( result.length ){
+                        Object.assign(that.flowData.flowBody[0],{ "pjbmmc":result[0].pjbmmc, "pjr":result[0].pjr, "pjrq":result[0].pjrq });//评价日期//评价人//评价部门名称
+					}
+					that.flowData.flowBody = Array.from(that.flowData.flowBody);
+                })
+            }
 		}
 	}
 </script>
 
 <style lang="less" scoped>
-	.is-horizontal {
-		border: 1px solid #b8e5af !important;
-	}
-	
-	.el-scrollbar__bar.is-horizontal {
-		border: 1px solid #b8e5af !important;
-	}
-	
-	.path-flow-ct .scrollbar-path-flow .el-scrollbar__bar .is-horizontal {
-		border: 1px solid red !important;
-		height: 15px;
-		opacity: 1 !important;
-		padding-top: 4px;
-		padding-right: 4px;
-		padding-left: 4px;
-	}
-	
-	.main .single-page-con .single-page.reset-page {
-		margin: 10px;
-		margin-left: 30px;
-		margin-right: 30px;
-		overflow:hidden;
-	}
-	
-	.lcInfo-c {
-		height: 60px;
-		line-height: 60px;
-		display: flex;
-		justify-content: space-between;
-		align-content: center;
-		p {
-			height: 60px;
-			line-height: 60px;
-		}
-	}
-	
-	ul,
-	li {
-		list-style: none;
-	}
-	
-	p {
-		margin: 0;
-	}
-	
-	.fl {
-		float: left;
-	}
-	
-	.cl:before {
-		content: '';
-		display: inline-block;
-		clear: both;
-	}
-	
-	.lancolor {
-		color: #5b5b5b;
-	}
-	
-	.whiteColor {
-		// color: white;
-		color:#3e3e3e;
-	}
-	
+	@liWidth:210px;
+	@liHeight:210px;
+	@blue:#569BE4;
+	@green:#58C278;
+	@yellow:#EBAC00;
 	.bodyWrap {
-		padding: 20px;
-		// background: #fff;
+		overflow: auto;
 		height: 100%;
-		min-width: 1110px;
-	}
-	
-	.bodyWrap>div {
-		position: relative;
 		background: #fff;
+		display: flex;
+		flex-direction: column;	
+		justify-content: center;
 	}
 	
 	.lcTop {
-		display: inline-block;
+		display: flex;
 		position: relative;
-		float: left;
+		align-items: center;
+		flex-direction: column;
 	}
 	
 	.startJ {
-		width: 70px;
-		display: inline-block;
-		position: absolute;
-		top: 50px;
-		left: 20px;
+		width: 80px;
+		height: 110px;
+		text-align: center;
 	}
 	
-	.startJ>div {
+	 .startJ>div {
 		height: 60px;
 		width: 60px;
-		border: 1px solid #b8e5af;
+		border: 1px solid #88d47a;
 		border-radius: 50%;
 		line-height: 60px;
 		text-align: center;
 		box-sizing: border-box;
-		position: absolute;
-		top: 0px;
-		left: -20px;
+		background: #5dc17a;
+		color: #fff;
+		margin: 0 auto;
+		z-index: 10;
+		position: relative;		
 	}
-	
-	.startX {
-		position: absolute;
-		top: 25px;
-		left: 37px;
-		width: 70px;
-		height: 16px;
-		background: url(../../../images/ksh/lcx.png) no-repeat;
-		background-size: 100% 100%;
-		display: inline-block;
-	}
-	
-	.lcTopUl {
-		margin-left: 97px;
-		float: left;
-	}
-	
-	.lcTopUl>li {
-		border-radius: 4px;
-		border: 1Px solid #b8e5af;
-	}
-	
-	.lcTopUl .sprLi {
-		margin-left: 37px;
-		width: 250px;
-		height: 140px;
-		// background: #fff;
-	}
-	
-	.lcTopUl>li,
-	.top-right {
-		float: left;
-		margin-left: 80px;
+	.bottom-div{
+		text-align: center;
 		position: relative;
+		display: flex;
+		justify-content: center;		
+		align-items: center;		
+		margin: 0 auto;
+		flex-direction: column;
+		padding: 30px;
+		width: 100%;
+    	overflow: auto;
+		justify-content: flex-start;	
+		height: fit-content;	
 	}
-	
-	.top-rightone {
-		float: left;
-		border: 1Px solid #b8e5af;
-		padding: 16px 8px 16px 16px;
+	.bottom-recive {
 		position: relative;
-		border-radius: 4px;
-	}
-	
-	.top-right>p {
-		position: absolute;
-		top: -22px;
 		text-align: center;
 		width: 100%;
-		color: #5b5b5b;
-		font-size: 14px;
 	}
 	
-	.top-right .box {
+	 .recive {
 		position: relative;
-		margin-right: 10px;
-		height: 140px;
-		border: 1px solid #b8e5af;
+		height: 120px;
+		border: 2px solid @blue;
 		border-radius: 4px;
-		float: left !important;
-		/* color: #fff; */
+		text-align: left;
+		display: flex;
+		flex-direction: column;	
+		overflow: hidden;
+		width: 100%;
+		.line{
+			height: 1px;
+			width: 85%;
+			background: #E2E2E2;
+			margin: 4px auto;
+		}
+		.lcInfo-c{
+			flex: 1 1 auto;
+			display: flex;
+			flex-direction: column;
+			>p{
+				height: 50%;
+				padding-left: 10px;
+				line-height: 22px;	
+				color: #A3A3A3;			
+			}
+			.lcInfo-c1{
+				height: 50%;
+				line-height: 29px;
+				display: flex;
+				justify-content: space-between;
+				position: relative;
+				>p{
+					padding-left: 10px;
+					line-height: 22px;
+					font-weight: 600;
+				}
+				>p.green{
+					color: @green;
+				}
+				>p.yellow{
+					color: @yellow;
+				}
+				>div.yellow{
+					.angle{
+						border-bottom: 15px solid @yellow;
+					}
+				}
+				.md-checkmark{
+					color: white;
+					line-height: 28px;	
+					z-index: 10;			
+					position: relative;	
+					display: inline-block;
+					height: 100%;
+					vertical-align: top;
+				}
+				.angle{
+					width: 0;
+					height: 0;
+					border-right: 15px solid transparent;
+					border-left: 15px solid transparent;
+					border-bottom: 15px solid @green;
+					position: absolute;
+					right: -10px;
+					bottom: -2px;
+					transform: rotate(135deg);
+					z-index: 0;
+				}
+			}
+		}	
 	}
-	
-	.top-right .bottom-x {
-		left: 37%;
-	}
-	
-	.bottom-recive {
-		float: left;
-		position: relative;
-	}
-	
-	.bottom-recive .recive {
-		position: relative;
-		margin-right: 10px;
-		height: 140px;
-		border: 1px solid #b8e5af;
-		border-radius: 4px;
-		background: #f9f8f9;
-	}
-	
-	.bottom-w {
-		position: relative;
-		margin-right: 10px;
-		margin-bottom: 82px;
-		clear: both;
-	}
-	
-	.bottom-wone {
-		width:250px;
-		height: 140px;
-		background: #f9f8f9;
-		height: 140px;
-		border: 1px solid #b8e5af;
-		border-radius: 4px;
-		top: 80px;
-		clear: both;
-	}
-	
 	.bottom-recive .recive:nth-child(2) {
 		margin-bottom: 0 !important;
 	}
-	
-	.bottom-recive>.bottom-x {
-		left: 37%;
-	}
-	
-	.lcTopUl>li:nth-child(2) {
-		margin: 0 80px;
-	}
-	
-	.zdInfo {
-		width: 70%;
-		p {
-			height: 20px;
-			line-height: 20px;
-		}
-	}
-	
-	.zdInfo>p:nth-child(2) {
-		font-size: 12px;
-		height: 20px;
-		line-height: 20px;
-	}
-	
-	.lcInfo-t>img {
-		position: relative;
-		top: 5px;
-		padding-right: 10px;
-	}
-	
-	.lcInfo-b {
-		p {
-			height: 60px !important;
-			line-height: 60px!important;
-		}
-	}
-	
-	.right-x {
-		position: absolute;
-		display: inline-block;
-		width: 70px;
-		height: 16px;
-		background: url(../../../images/ksh/lcx.png) no-repeat;
-		background-size: 100% 100%;
-		right: -80px;
-		top: 74px;
-	}
-	
-	.bottom-x {
-		position: absolute;
-		display: inline-block;
-		width: 70px;
-		height: 16px;
-		background: url(../../../images/ksh/lcx.png) no-repeat;
-		background-size: 100% 100%;
-		left: 36%;
-		bottom: -49px;
-		transform: rotate(90deg);
-	}
-	
-	.line-x {
-		position: absolute;
-		display: inline-block;
-		width: 260px;
-		height: 16px;
-		background: url(../../../images/ksh/lcx.png) no-repeat;
-		background-size: 138% 100%;
-		left: 0;
-		top: -55px;
-	}
-	
-	.first-line {
-		width: 156px;
-		transform: translate(104px);
-		position: absolute;
-		display: inline-block;
-		height: 16px;
-		background: url(../../../images/ksh/lcx.png) no-repeat;
-		background-size: 138% 100%;
-		left: 0;
-		top: -55px;
-	}
-	
-	.end-line {
-		width: 109px;
-		position: absolute;
-		display: inline-block;
-		height: 16px;
-		background: url(../../../images/ksh/lcx.png) no-repeat;
-		background-size: 138% 100%;
-		left: 0;
-		top: -55px;
-	}
-	
-	.top-x {
-		position: absolute;
-		display: inline-block;
-		width: 70px;
-		height: 16px;
-		background: url(../../../images/ksh/lcx.png) no-repeat;
-		background-size: 50% 100%;
-		left: 66px;
-		top: -13px;
-		transform: rotate(-270deg);
-	}
-	
-	.bottom-approve {
-		position: relative;
-		display: inline-block;
-		text-align: left;
-		margin-left: 0;
-	}
-	
-	.end-box {
-		position: absolute;
-		bottom: -142px;
-		left: 95px;
-		width: 60px;
-		height: 60px;
-		display: inline-block;
-		background: #dcdcdc;
-		border-radius: 50%;
-		text-align: center;
-		line-height: 50px;
-	}
-	
-	.noAgree-box {
-		position: absolute;
-		bottom: 71px;
-		right: -142px;
-		width: 60px;
-		height: 60px;
-		display: inline-block;
-		background: #dcdcdc;
-		border-radius: 50%;
-		text-align: center;
-		line-height: 50px;
-	}
-	
-	.end {
-		color: #fff;
-	}
-	
-	.qsDiv {
-		position: absolute;
-		top: 265px;
-		min-width: 520px;
-		max-width: 550px;
-	}
-	
-	.qsdivone {
-		border-radius: 4px;
-		border: 1px solid #b8e5af;
-		display: flex;
-		min-height: 173px;
-		justify-content: space-around;
-		padding: 16px 8px 16px 16px;
-	}
-	
-	.qsDiv i {
-		bottom: 0;
-		top: -49px;
-		left: 43.2%;
-	}
-	
-	.jsypDiv {
-		position: absolute;
-		top: 545px;
-		left: 41%;
-	}
-	
-	.jsypDiv i {
-		bottom: 0;
-		top: -49px;
-		left: 35%;
-	}
-	
-	.pjDiv {
-		position: absolute;
-		left: 434px;
-		top: 551px;
-		;
-	}
-	
-	.pjDiv i {
-		bottom: 0;
-		top: -49px;
-		left: 36%;
-	}
-	
-	.newdiv {
-		width: 248px;
-		height: 78px;
-		background: #fff;
-		padding: 10px 5px 5px 10px;
+	.lcInfo-t{
 		border-radius: 8px 8px 0 0;
-	}
-	
-	.newdata {
-		padding: 0 10px;
-		p {
-			height: 60px;
-			line-height: 60px;
-		}
-	}
-	
-	.single-page {
-		height: auto !important;
-	}
-	
-	.calcWidth {
-		width: 70%;
-		margin-left: 10px;
-		white-space: normal;
-	}
-	
-	.path-flow {
-		li:nth-child(2) {
-			.and-so-on {
-				&::after {
-					content: " 等····";
-				}
+		height: 65px;
+		padding: 8px 10px;
+		display: flex;
+		justify-content: left;		
+		>.userMsg{
+			display: flex;
+			flex-direction: column;
+			>p{
+				height: 50%;
+				padding-left: 10px;
+			}
+			>p.lancolor{
+				line-height: 25px;
+				color: @blue;
+				font-size: 14px;
+				font-weight: 600;				
+			}
+			>p:last-child{
+				font-size: 12px;
+				color: #B3B3B3;
+				line-height: 16px;
 			}
 		}
 	}
 	
-	.el-scrollbar__bar .is-vertical {
-		display: none;
+	.lcInfo-t>.headImg {
+		position: relative;
+		border-radius: 50%;
+		overflow: hidden;
+		height: 50px;
+		width: 50px;
+		text-align: center;
+		flex: 0 0 auto;
+		>img{
+			width: auto;
+			height: 100%;
+		}
+	}
+	.bottom-ui.sh{
+		min-height: 263px;
+	}
+	.bottom-ul{
+		display: inline-block;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		align-items: center;
+		max-width: 100%;
+		.line_center{
+			width: calc(100% - 208px);
+			background-color: #dfe1e4;
+			height: 2px;
+		}
+		.list{
+			display: flex;
+			width: 100%;
+			overflow: auto;		
+    		max-width: 100%;				
+		}
+		li.bottom-approve.getLine{
+			&::after{
+				content: '';
+				display: inline-block;
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+				background-color: #dfe1e4;
+				height: 2px;				
+				right: 0;
+			}
+			&::before{
+				content: '';
+				display: inline-block;
+				position: absolute;
+				top: 0;
+				background-color: #dfe1e4;
+				height: 2px;
+				width: 100%;
+				right: 0;
+			}
+			&:first-child{
+				&::after{
+					right: 0;
+					left: unset;
+					width: 50%;
+				}
+				&::before{
+					right: 0;
+					left: unset;
+					width: 50%;
+				}
+			}
+			&:last-child{
+				&::after{
+					right: unset;
+					left: 0;
+					width: 50%;
+				}
+				&::before{
+					right: unset;
+					left: 0;
+					width: 50%;
+				}
+			}
+		}
+	}
+	.top-x {
+		display: inline-block;
+    	width: 12px;
+		height: 46px;
+		background: url('~@/images/ksh/lcx_h.png') no-repeat;
+		// transform: rotate(-270deg);
+		background-position: top;
+	}
+	.flex0{
+		flex: none;
+	}
+	.liney{
+		display: inline-block;
+		width: 2px;
+		height: 46px;
+		background-color: #dfe1e4;	
+	}
+	.top-y{
+		display: inline-block;
+		// margin-top:10px;
+		width: 2px;
+		height: 50px;
+		background: #dfe1e4;		
+	}
+	.bottom-approve {
+		position: relative;
+		display: inline-block;
+		min-width: @liWidth;
+		width: @liWidth;
+		text-align: left;
+		padding: 0 5px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;	
+		position: relative;	
+	}
+	.filterGray{
+		filter: grayscale(100%);
+	}	
+	/* .xwbg {
+		background-image: url(../../../../images/ksh/bg_xw.png);
+	}
+	 */
+	.end-box {
+		width: 70px;
+		height: 70px;
+		display: inline-block;
+		background: #dcdcdc;
+		border-radius: 50%;
+		text-align: center;
+		line-height: 72px;
+	}
+	.end-box.green{
+		background-color: @green;
+	}	
+	.end {
+		color:#fff;
 	}
 </style>

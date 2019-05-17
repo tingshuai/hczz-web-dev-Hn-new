@@ -75,14 +75,12 @@
 					<template slot-scope="scope">
 						<a class="a-czl" v-if="scope.row.zt == 3 || scope.row.zt == 5" href="javascript:void(0)" @click="lookData(scope.row)">查看</a>
 						<a class="a-czl" v-else href="javascript:void(0)" @click="add(scope.row)">反馈</a>
-
 					</template>
 				</el-table-column>
 			</el-table>
 		</div>
 		<div class="pagination-ct">
 			<Page class="clientPage" style="display: inline-block;" :total="total" :current.sync="basePage.pageindex" show-sizer placement="top" @on-change="pageChange" @on-page-size-change="pagesizeChange" :page-size.sync="basePage.pagesize" :page-size-opts="pageArray" show-elevator show-total></Page>
-
 			<!-- <el-pagination @size-change="handleSizeChange" background @current-change="handleCurrentChange" :current-page="basePage.pageindex" :page-sizes="pageArray" :page-size="10" :total="total">
 			</el-pagination> -->
 		</div>
@@ -203,8 +201,8 @@
 				});
 			},
 			closeModel(ruleForm, proceUpload) {
-				this.visible = false
 				this.formValidate.fknr = null;
+				this.visible = false
 				//ruleForm.resetFields();
 				// if(this.states) {
 				// 	proceUpload.clearFiles();

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="visible">
         <el-dialog class="modal-ct workBench-group-modal" :title="'编号：'+xcObj.sqwh" @close='closeModel' :visible.sync="visible" :modal-append-to-body='false' width="700px">
 			<el-form :model="formValidate" ref="ruleForm" label-width="100px" class="demo-ruleForm" :rules=" states ? rules : null">
 				<el-row>
@@ -76,7 +76,7 @@
 					<el-col :span="24">
 						<el-form-item label="反馈内容：" v-model="formValidate" prop='fknr' class="word-break">
 							<el-input v-if="states" v-model.trim="formValidate.fknr" clearable type="textarea" :rows="3" size="small" :maxlength="300"></el-input>
-							<span v-else :rows="3" size="small" :maxlength="300" class="oSpan">{{formValidate.fknr ? formValidate.fknr : "--"}}</span>
+							<span v-else :rows="3" size="small" :maxlength="300" class="oSpan">{{ formValidate.fknr ? formValidate.fknr : "--"}}</span>
 						</el-form-item>
 					</el-col>
 				</el-row>
@@ -165,6 +165,7 @@ export default {
             let that = this
 			// this.$emit('closeModel', that.$refs.ruleForm, that.$refs.proceUpload)
 			// this.$emit('qqxcdfkcloseModel', that.$refs.ruleForm, that.$refs.proceUpload)
+			this.formValidate.fknr = ''
 			this.$refs.ruleForm.resetFields();
             that.visible = false
         },

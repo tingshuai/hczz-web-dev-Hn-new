@@ -20,42 +20,42 @@
 					</el-tabs>
 				</div>
 				<div class="evaluates">
-                    <Form ref="approve" :model="formDynamic" :rules="ruleValidate" :label-width="120">
-                    <FormItem label="服务态度：" >
-			            <el-rate v-model="formDynamic.fwtd" :disabled="disabled"></el-rate>
-			        </FormItem>
-			        <FormItem label="反馈速度：">
-			            <el-rate v-model="formDynamic.fksu" :disabled="disabled"></el-rate>
-			        </FormItem>
-			        <FormItem label="反馈效果：">
-			            <el-rate v-model="formDynamic.yyxg" :disabled="disabled"></el-rate>
-			        </FormItem>
-			        <Row>
-			        	<Col span="12">
-				        	<FormItem label="是否破案：">
-					             <RadioGroup v-model="formDynamic.sfpa">
-					                <Radio label="1" :disabled="disabled">是</Radio>
-					                <Radio label="2" :disabled="disabled">否</Radio>
-					            </RadioGroup>
-					        </FormItem>
-				        </Col>
-				        <Col span="12" class="uses">
-				        	<FormItem label="是否发挥作用：">
-					             <RadioGroup v-model="formDynamic.sffhzy">
-					                <Radio label="1" :disabled="disabled">是</Radio>
-					                <Radio label="2" :disabled="disabled">否</Radio>
-					            </RadioGroup>
-					        </FormItem>
-				        </Col>
-			        </Row>
-			        <FormItem label="抓获人数：" prop="zhrs">
-						<span v-if="disabled">{{ formDynamic.zhrs }}</span>
-			            <Input v-else v-model.trim="formDynamic.zhrs" :clearable="clearable"   placeholder="请输入抓获人数" :maxlength="10" :readonly="disabled"></Input>
-			        </FormItem>
-			        <FormItem label="综合内容评价：" prop="zhpjnr">
-						<span v-if="disabled">{{ formDynamic.zhpjnr }}</span>
-			            <Input v-else v-model.trim="formDynamic.zhpjnr" clearable type="textarea" :rows="4" placeholder="请输入综合内容评价" :maxlength="120" :readonly="disabled"></Input>
-			        </FormItem>
+                    <Form ref="approve" :model="formDynamic" :rules="disabled ? null : ruleValidate" :label-width="120">
+						<FormItem label="服务态度：" >
+							<el-rate v-model="formDynamic.fwtd" :disabled="disabled"></el-rate>
+						</FormItem>
+						<FormItem label="反馈速度：">
+							<el-rate v-model="formDynamic.fksu" :disabled="disabled"></el-rate>
+						</FormItem>
+						<FormItem label="反馈效果：">
+							<el-rate v-model="formDynamic.yyxg" :disabled="disabled"></el-rate>
+						</FormItem>
+						<Row>
+							<Col span="12">
+								<FormItem label="是否破案：">
+									<RadioGroup v-model="formDynamic.sfpa">
+										<Radio label="1" :disabled="disabled">是</Radio>
+										<Radio label="2" :disabled="disabled">否</Radio>
+									</RadioGroup>
+								</FormItem>
+							</Col>
+							<Col span="12" class="uses">
+								<FormItem label="是否发挥作用：">
+									<RadioGroup v-model="formDynamic.sffhzy">
+										<Radio label="1" :disabled="disabled">是</Radio>
+										<Radio label="2" :disabled="disabled">否</Radio>
+									</RadioGroup>
+								</FormItem>
+							</Col>
+						</Row>
+						<FormItem label="抓获人数：" prop="zhrs">
+							<span v-if="disabled">{{ formDynamic.zhrs }}</span>
+							<Input v-else v-model.trim="formDynamic.zhrs" :clearable="clearable"   placeholder="请输入抓获人数" :maxlength="10" :readonly="disabled"></Input>
+						</FormItem>
+						<FormItem label="综合内容评价：" prop="zhpjnr">
+							<span v-if="disabled">{{ formDynamic.zhpjnr }}</span>
+							<Input v-else v-model.trim="formDynamic.zhpjnr" clearable type="textarea" :rows="4" placeholder="请输入综合内容评价" :maxlength="120" :readonly="disabled"></Input>
+						</FormItem>
 			        </Form>
 				</div>
 			</Modal>

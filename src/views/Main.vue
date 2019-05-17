@@ -24,7 +24,7 @@
     }
 
     .el-form-item__label, .el-form-item__content {
-        vertical-align: middle !important;
+        // vertical-align: middle !important;
     }
 
     /*.workBench-group-modal .el-form-item {*/

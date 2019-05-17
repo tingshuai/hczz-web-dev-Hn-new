@@ -141,10 +141,9 @@
 			show(val){
 				this.visible=val;
 			},
-			'formDynamic.blbmid'(val){
-				api.api('get',api.systemUrl+'/account/info/queryPage2?officeCode='+val+'&pageSize=1000000&pageNum=1').then(res=>{
-                    this.userList=res.list;
-				})
+			receiveOfficeArr(n){
+				this.formDynamic.blbmid = n[0].tag ? n[0].code : n[0].officeCode;
+				this.getPeopleList(n);
 			},
 			'formDynamic.blrid'(val){
 				let arr=this.userList.filter(item=>{
@@ -155,6 +154,11 @@
 			}
 		},
 		methods: {
+			getPeopleList(val){
+				api.api('get',api.systemUrl+'/account/info/queryPage2?officeCode='+ this.formDynamic.blbmid +'&pageSize=1000000&pageNum=1').then(res=>{
+                    this.userList=res.list;
+				})
+			},
 			render(){
 				api.api('post',api.systemUrl+'/office/findOfficeTreeByType').then(res=>{
 					this.officeList=res;
@@ -217,9 +221,8 @@
 					blbz:''
 				};
             },
-            handleOffice(val){//接收单位
+			handleOffice(val){//接收单位
             	this.receiveOfficeArr = val;
-            	console.log(val)
             	this.formDynamic.blbmid=this.receiveOfficeArr[0].code;
             	this.formDynamic.blbmmc=this.receiveOfficeArr[0].title;
             },

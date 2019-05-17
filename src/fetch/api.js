@@ -101,7 +101,10 @@ export function ajaxJson(method, url, data) {
         instance({
             method: method,
             url: url,
-            data: data
+            data: data,
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+            }
         }).then(res => {
             if (res.data.code == 200) {
                 resolve(res.data.data)

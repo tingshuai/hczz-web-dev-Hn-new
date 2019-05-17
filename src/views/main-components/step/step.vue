@@ -46,13 +46,12 @@
 <style lang="less" scoped>
 	.step {
 		height: 420px;
-        /*overflow: auto;*/
-		margin-top:20px;
-		margin-left:20px;
+        overflow: auto;
+		padding-top: 20px;
+		padding-left: 20px;
+		width: 100%;
 		ul{
 			height: 100%;
-			overflow-y: auto;
-			overflow-x: hidden;
 			li{
 				height: fit-content;
 				position: relative;

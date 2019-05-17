@@ -73,7 +73,7 @@
                 }
                 this.showResult = true;
                 this.listLoading = true;
-                api.api('post', api.systemUrl + '/office/queryPage', {
+                api.json('post', api.systemUrl + '/office/queryPage', {
                     pageNum: 1,
                     pageSize: 20000000,
                     officeName: sreachText
