@@ -175,7 +175,11 @@
 				flowData:{
                     flowMsg:{},
                     spMsg:[],//审批信息....
-                    flowBody:[]//签收反馈评价信息
+                    flowBody:[
+						{
+							zt:0
+						}
+					]//签收反馈评价信息
                 }
 			}
         },
